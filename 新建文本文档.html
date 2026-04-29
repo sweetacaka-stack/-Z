@@ -1,0 +1,272 @@
+import React, { useState } from 'react';
+import { Upload, ArrowRight, Loader2, Image as ImageIcon, Camera, SlidersHorizontal, Sparkles } from 'lucide-react';
+
+const ASPECT_RATIOS = [
+  { label: '1:1', value: '1/1', desc: '社交媒体' },
+  { label: '4:5', value: '4/5', desc: '电商主图' },
+  { label: '3:4', value: '3/4', desc: '常规海报' },
+  { label: '16:9', value: '16/9', desc: '横版Banner' },
+];
+
+export default function App() {
+  const [file, setFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [resultImage, setResultImage] = useState(null);
+  const [selectedRatio, setSelectedRatio] = useState('4/5');
+  const [customWidth, setCustomWidth] = useState('1024');
+  const [customHeight, setCustomHeight] = useState('1280');
+
+  // 处理文件上传
+  const handleUpload = (e) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPreviewUrl(URL.createObjectURL(selectedFile));
+      setResultImage(null); // 上传新图时重置结果
+    }
+  };
+
+  // 模拟 API 生成过程
+  const handleGenerate = async () => {
+    if (!file) return;
+    setIsGenerating(true);
+    
+    // TODO: 在此替换为真实的 API 调用 (如 Fetch / Axios)
+    // const formData = new FormData();
+    // formData.append('image', file);
+    // formData.append('ratio', selectedRatio);
+    // const response = await fetch('/api/generate', { method: 'POST', body: formData });
+    
+    // 模拟网络延迟
+    await new Promise((resolve) => setTimeout(resolve, 3500));
+    
+    // 模拟生成的占位图 (使用了一张高质量的 Unsplash 摄影图模拟模特拿产品的氛围)
+    setResultImage('https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&q=80&w=1200');
+    setIsGenerating(false);
+  };
+
+  return (
+    <div className="relative min-h-screen bg-[#0a0908] text-white font-sans overflow-hidden selection:bg-white/20">
+      
+      {/* 装饰性背景光晕和圆环 (参考原图的镜头光圈效果) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
+        <div className="absolute w-[800px] h-[800px] border border-white/[0.03] rounded-full top-1/4 right-0 translate-x-1/3 -translate-y-1/4"></div>
+        <div className="absolute w-[1200px] h-[1200px] border border-white/[0.02] rounded-full top-1/4 right-0 translate-x-1/4 -translate-y-1/4"></div>
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#bc9a78]/10 to-transparent blur-[150px]"></div>
+      </div>
+
+      {/* 顶部导航栏 */}
+      <nav className="relative z-10 flex items-center justify-between px-8 md:px-12 py-6">
+        <div className="flex items-center gap-12">
+          <div className="text-xl font-medium tracking-tight">
+            Aura<span className="text-white/40">Gen</span>
+          </div>
+          <div className="hidden md:flex items-center gap-8 text-xs font-medium text-white/50">
+            <a href="#" className="hover:text-white transition-colors">Platform</a>
+            <a href="#" className="hover:text-white transition-colors">Strategies</a>
+            <a href="#" className="hover:text-white transition-colors">Insights</a>
+            <a href="#" className="hover:text-white transition-colors">Pricing</a>
+          </div>
+        </div>
+        <button className="text-sm text-white/70 hover:text-white flex items-center gap-2 transition-colors">
+          Sign In <ArrowRight size={16} />
+        </button>
+      </nav>
+
+      {/* 主体内容区 */}
+      <main className="relative z-10 grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)] px-8 md:px-12">
+        
+        {/* 左侧：文案与操作面板 (占比 5) */}
+        <div className="lg:col-span-5 flex flex-col justify-center pt-12 pb-20 lg:py-0 lg:pr-12">
+          
+          {/* 标题区域 */}
+          <h1 className="text-5xl md:text-6xl lg:text-[64px] font-light tracking-tight leading-[1.1] mb-6">
+            Smarter visual <br />
+            starts here
+          </h1>
+          <p className="text-white/50 text-sm md:text-base leading-relaxed max-w-md mb-12 font-light">
+            Our platform uses AI to read aesthetics the way humans can't — transforming raw product images into cinematic lifestyle photography.
+          </p>
+
+          {/* 控制面板 */}
+          <div className="space-y-6 max-w-md">
+            
+            {/* 上传区域 */}
+            <div className="relative group">
+              <input 
+                type="file" 
+                id="file-upload" 
+                className="hidden" 
+                accept="image/*"
+                onChange={handleUpload}
+              />
+              <label 
+                htmlFor="file-upload"
+                className={`flex flex-col items-center justify-center w-full h-32 rounded-xl border border-white/10 bg-white/[0.02] backdrop-blur-sm cursor-pointer transition-all duration-300 ${previewUrl ? 'border-white/20 bg-white/[0.05]' : 'hover:bg-white/[0.04] hover:border-white/20'}`}
+              >
+                {previewUrl ? (
+                  <div className="absolute inset-0 p-4 flex items-center justify-center">
+                    <img src={previewUrl} alt="Preview" className="h-full object-contain drop-shadow-2xl" />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-xl backdrop-blur-sm">
+                      <span className="text-xs font-medium bg-white/10 px-3 py-1.5 rounded-full backdrop-blur-md">更换图片</span>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <Upload className="w-5 h-5 text-white/40 mb-2 group-hover:text-white/70 transition-colors" />
+                    <span className="text-xs text-white/40 group-hover:text-white/60">点击或拖拽上传产品白底图</span>
+                  </>
+                )}
+              </label>
+            </div>
+
+            {/* 尺寸选择 */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.15em] text-white/40">
+                <SlidersHorizontal size={12} />
+                <span>Dimensions & Ratio</span>
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {ASPECT_RATIOS.map((ratio) => (
+                  <button
+                    key={ratio.value}
+                    onClick={() => setSelectedRatio(ratio.value)}
+                    className={`py-2 rounded-lg text-xs transition-all border ${
+                      selectedRatio === ratio.value 
+                        ? 'bg-white text-black border-white font-medium' 
+                        : 'bg-transparent text-white/50 border-white/10 hover:border-white/30 hover:bg-white/[0.02]'
+                    }`}
+                  >
+                    {ratio.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* 自定义尺寸输入 */}
+              <div className="flex gap-3 pt-1">
+                <div className="flex-1 relative group">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-white/40 uppercase tracking-wider group-focus-within:text-white transition-colors">W</span>
+                  <input 
+                    type="number" 
+                    value={customWidth}
+                    onChange={(e) => {
+                      setCustomWidth(e.target.value);
+                      setSelectedRatio('custom');
+                    }}
+                    className={`w-full bg-white/[0.02] border rounded-lg pl-8 pr-3 py-2 text-sm transition-colors focus:outline-none ${selectedRatio === 'custom' ? 'border-white/50 text-white' : 'border-white/10 text-white/40 focus:border-white/30'}`}
+                    placeholder="1024"
+                  />
+                </div>
+                <div className="flex items-center text-white/20 text-sm">×</div>
+                <div className="flex-1 relative group">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-white/40 uppercase tracking-wider group-focus-within:text-white transition-colors">H</span>
+                  <input 
+                    type="number" 
+                    value={customHeight}
+                    onChange={(e) => {
+                      setCustomHeight(e.target.value);
+                      setSelectedRatio('custom');
+                    }}
+                    className={`w-full bg-white/[0.02] border rounded-lg pl-8 pr-3 py-2 text-sm transition-colors focus:outline-none ${selectedRatio === 'custom' ? 'border-white/50 text-white' : 'border-white/10 text-white/40 focus:border-white/30'}`}
+                    placeholder="1280"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 生成按钮 (参考原图的白色胶囊按钮) */}
+            <div className="pt-4">
+              <button
+                onClick={handleGenerate}
+                disabled={!file || isGenerating}
+                className={`group relative flex items-center justify-center gap-3 w-44 h-12 rounded-full font-medium text-sm transition-all duration-300 ${
+                  !file || isGenerating
+                    ? 'bg-white/10 text-white/30 cursor-not-allowed'
+                    : 'bg-white text-black hover:bg-white/90 hover:scale-[1.02]'
+                }`}
+              >
+                {isGenerating ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Processing...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Start Generating</span>
+                    <Sparkles className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* 底部统计数据 (参考原图左下角) */}
+          <div className="mt-auto pt-16 flex items-start gap-12">
+            <div>
+              <div className="text-xl font-light tracking-tight">+98.5%</div>
+              <div className="text-[10px] text-white/40 mt-1 uppercase tracking-wider">Realism Score</div>
+            </div>
+            <div>
+              <div className="text-xl font-light tracking-tight">4K</div>
+              <div className="text-[10px] text-white/40 mt-1 uppercase tracking-wider">Resolution</div>
+            </div>
+            <div>
+              <div className="text-xl font-light tracking-tight">V2.4</div>
+              <div className="text-[10px] text-white/40 mt-1 uppercase tracking-wider">Engine Model</div>
+            </div>
+          </div>
+        </div>
+
+        {/* 右侧：结果展示区 (占比 7) */}
+        <div className="lg:col-span-7 relative flex items-center justify-center lg:justify-end py-12 lg:py-8 h-[60vh] lg:h-auto">
+          {/* 容器，根据选择的比例动态调整宽高比 */}
+          <div 
+            className="relative w-full max-w-[600px] max-h-full rounded-2xl overflow-hidden bg-[#111] border border-white/10 shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
+            style={{ 
+              aspectRatio: selectedRatio === 'custom' && customWidth && customHeight ? `${customWidth}/${customHeight}` : (selectedRatio !== 'custom' ? selectedRatio : '1/1'),
+              // 添加轻微的阴影光晕
+              boxShadow: resultImage ? '0 0 80px -20px rgba(188,154,120,0.15)' : 'none' 
+            }}
+          >
+            {isGenerating ? (
+              // 加载状态
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#111]">
+                <div className="relative w-16 h-16 mb-6">
+                  <div className="absolute inset-0 rounded-full border-t-2 border-l-2 border-white/20 animate-[spin_2s_linear_infinite]"></div>
+                  <div className="absolute inset-2 rounded-full border-b-2 border-r-2 border-white/40 animate-[spin_1.5s_linear_infinite_reverse]"></div>
+                  <Sparkles className="absolute inset-0 m-auto w-5 h-5 text-white/50 animate-pulse" />
+                </div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/40 animate-pulse">Rendering Scene...</div>
+              </div>
+            ) : resultImage ? (
+              // 结果图
+              <img 
+                src={resultImage} 
+                alt="Generated Lifestyle" 
+                className="w-full h-full object-cover animate-[fadeIn_1s_ease-out]"
+              />
+            ) : (
+              // 初始占位状态 (默认的电影感背景或者提示)
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white/10 bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a]">
+                <Camera size={48} strokeWidth={1} className="mb-4 opacity-50" />
+                <p className="text-[10px] uppercase tracking-[0.15em]">Awaiting input</p>
+                
+                {/* 装饰性网格线 */}
+                <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+              </div>
+            )}
+
+            {/* 图片加载完成后的边角装饰 */}
+            {resultImage && !isGenerating && (
+              <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-md border border-white/10 text-[10px] text-white/70 font-mono tracking-wider">
+                RAW {selectedRatio === 'custom' ? `${customWidth}x${customHeight}` : selectedRatio}
+              </div>
+            )}
+          </div>
+        </div>
+
+      </main>
+    </div>
+  );
+}

@@ -1,0 +1,116 @@
+   ▲ Next.js 15.5.15
+   - Local:        http://127.0.0.1:3000
+   - Network:      http://127.0.0.1:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1822ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled / in 1396ms (622 modules)
+ GET /works/detail-page 404 in 1636ms
+ GET / 200 in 724ms
+ GET /scene 200 in 1099ms
+ GET /works/detail-page 404 in 30ms
+ GET /works/detail-page 404 in 26ms
+ GET /works/detail-page 404 in 27ms
+ GET /works/detail-page 404 in 26ms
+ GET /works/detail-page 404 in 35ms
+ GET /works/detail-page 404 in 29ms
+ GET /works/detail-page 404 in 30ms
+ GET /works/detail-page 404 in 27ms
+ GET /works/detail-page 404 in 26ms
+ GET /works/detail-page 404 in 26ms
+ GET /works/detail-page 404 in 27ms
+ GET /works/detail-page 404 in 26ms
+ GET /works/detail-page 404 in 33ms
+ GET /works/detail-page 404 in 28ms
+ GET / 200 in 51ms
+ GET /scene 200 in 15ms
+ GET / 200 in 14ms
+ GET /scene 200 in 13ms
+ GET / 200 in 14ms
+ GET /scene 200 in 16ms
+ ✓ Compiled in 378ms (631 modules)
+ GET /scene 200 in 83ms
+ ✓ Compiled in 465ms (631 modules)
+ GET /scene 200 in 287ms
+ GET /scene 200 in 15ms
+ GET /scene 200 in 14ms
+ ✓ Compiled /detail in 291ms (619 modules)
+ GET /detail 200 in 493ms
+ GET /scene 200 in 41ms
+ GET / 200 in 40ms
+ GET /detail 200 in 15ms
+ GET /scene 200 in 15ms
+ GET /detail 200 in 12ms
+ GET /scene 200 in 21ms
+ GET / 200 in 43ms
+ GET /detail 200 in 50ms
+ GET /scene 200 in 75ms
+ ✓ Compiled /api/generate-detail in 359ms (654 modules)
+ POST /api/generate-detail 400 in 452ms
+ GET /scene 200 in 135ms
+ POST /api/generate-detail 400 in 8ms
+ ✓ Compiled /api/generate-prompt in 299ms (644 modules)
+ POST /api/generate-prompt 400 in 228ms
+ POST /api/generate-scene 400 in 356ms
+ ✓ Compiled in 253ms (632 modules)
+ GET /scene 200 in 123ms
+ ✓ Compiled in 388ms (632 modules)
+ GET /scene 200 in 64ms
+ ✓ Compiled /detail in 143ms (400 modules)
+ ✓ Compiled in 1ms (402 modules)
+ ✓ Compiled in 0ms (402 modules)
+ ✓ Compiled in 1ms (402 modules)
+ POST /api/generate-detail 400 in 508ms
+ GET / 200 in 529ms
+ GET /detail 200 in 796ms
+ GET /scene 200 in 633ms
+ GET /scene 200 in 746ms
+ GET /detail 200 in 15ms
+ GET /detail 200 in 49ms
+ GET /scene 200 in 14ms
+ GET / 200 in 13ms
+ GET /detail 200 in 13ms
+ GET /scene 200 in 16ms
+ GET / 200 in 14ms
+ GET /detail 200 in 13ms
+ GET /scene 200 in 16ms
+ GET / 200 in 13ms
+ GET /detail 200 in 15ms
+ GET / 200 in 15ms
+ ✓ Compiled in 327ms (254 modules)
+ ✓ Compiled in 500ms (636 modules)
+ GET / 200 in 670ms
+ GET /detail 200 in 670ms
+ GET / 200 in 28ms
+ GET /detail 200 in 28ms
+ ✓ Compiled in 79ms (254 modules)
+ GET / 200 in 58ms
+ GET /detail 200 in 60ms
+ GET /scene 200 in 25ms
+ GET /detail 200 in 17ms
+ GET /scene 200 in 16ms
+ GET / 200 in 14ms
+ ✓ Compiled in 88ms (254 modules)
+ GET / 200 in 36ms
+ GET /detail 200 in 37ms
+ GET /detail 200 in 150ms
+ GET /scene 200 in 197ms
+ GET / 200 in 39ms
+ GET / 200 in 47ms
+ ✓ Compiled in 112ms (254 modules)
+ GET /detail 200 in 24ms
+ GET / 200 in 21ms
+ ✓ Compiled in 171ms (254 modules)
+ GET / 200 in 34ms
+ GET /detail 200 in 34ms
+ GET /detail 200 in 52ms
+ GET / 200 in 44ms
+   ▲ Next.js 15.5.15
+   - Local:        http://127.0.0.1:3000
+   - Network:      http://127.0.0.1:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1832ms
